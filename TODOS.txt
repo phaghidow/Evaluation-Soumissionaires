@@ -1,0 +1,46 @@
+## Suivi d'homogénéité
+
+### Implémenté
+- [x] Rail groupé par Pilotage, Parcours et Référence; redimensionnable et repliable.
+- [x] Résumé du workflow réservé à l'accueil; plus de bandeaux globaux en doublon.
+- [x] Grille de métriques adaptative et contenu du dashboard défilant.
+- [x] Plancher de fenêtre ramené à 980 x 680; les pages sans scroll interne sont hébergées dans une zone commune.
+- [x] Titres globaux repliables et sélecteurs DQE réorganisés pour les fenêtres étroites.
+- [x] Sous-onglets financiers hébergés dans des zones défilantes rétractables.
+- [x] Dialogues d'ajout/modification avec formulaire défilant et actions fixes en pied.
+- [x] Palette et composants communs conservés pour tableaux, formulaires, onglets et dialogues via `ui_theme.py`.
+- [x] Icônes natives Qt pour la marque et l'état terminé; une seule ombre portée sur l'action prioritaire.
+
+### À vérifier ensuite
+- [x] Faire une vérification visuelle sur Windows à 980 x 680 et avec le zoom à 140 %; les contrôles hors écran ne valident pas le rendu natif.
+- [x] Tester les largeurs inférieures à 980 px et réduire les débordements horizontaux restants avant d'abaisser le minimum de fenêtre.
+- [x] Ajouter des tests UI automatisés pour les tailles de fenêtre et le passage entre les sept pages.
+
+### Règles de composition
+- Le rail indique la position globale; Répertoire et Historique restent des pages de référence.
+- Les étapes détaillées et l'action suivante vivent dans la page concernée, pas dans un bandeau répété.
+- Les onglets servent aux sous-vues d'une étape; les dialogues gardent des formulaires accessibles par défilement.
+
+## Plan d'amélioration métier
+
+### En cours
+- [x] Charger le Répertoire dès son ouverture et vider les résultats périmés quand une recherche ne trouve rien.
+- [x] Remplacer le rafraîchissement global périodique par des signaux émis après les écritures métier.
+- [x] Couvrir la création d'un dossier et l'import DQE dans les notifications de changement.
+
+### Prochaines priorités
+- [x] Centraliser la validation des numéros de pli, lots, délais et montants sans modifier les règles de qualification/classement.
+- [x] Rendre les rafraîchissements ciblés par page et conserver le filtre courant du Répertoire après une écriture.
+- [x] Faciliter la lecture de l'évaluation technique avec une synthèse compacte et les critères complets dans une vue distincte.
+- [x] Ajouter des tests UI pour l'ordre du workflow, les signaux de changement et les recherches sans résultat.
+- [x] Mesurer les recherches d'offres SQLite; ajouter des index lot/pli après benchmark sur 100 000 lignes synthétiques.
+- [x] Évaluer MySQL : conserver SQLite pour le poste local; réévaluer seulement avec un besoin multi-utilisateur réseau.
+- [x] Versionner le schéma, sauvegarder avant migration et unifier les résultats techniques dans `workflow_lot`.
+- [x] Conserver `offre_qualifie` comme vue de compatibilité et documenter les dépendances financières de `soumissionnaire_qualifie`.
+- [x] Normaliser les clés étrangères financières vers `workflow_lot` et `lot`.
+- [x] Bloquer les remplacements DQE qui invalideraient des prix ou montants déjà saisis.
+- [x] Retirer `soumissionnaire_qualifie` via migration v4 après vérification des clés étrangères.
+- [x] Retirer le dernier adaptateur d'écriture de qualification et basculer ses tests sur l'API pli/lot.
+- [x] Migrer la base locale réelle v2→v4 avec backup; rattacher et auditer l'offre héritée orpheline.
+
+Ordre métier à préserver : Dossier → Offres → Évaluation technique → Qualification → DQE → Montants → Classement.

@@ -1,0 +1,3 @@
+PyQt5
+openpyxl
+python-docx
