@@ -119,4 +119,4 @@ git push -u origin main
 
 ## License
 
-This project is available under the MIT license unless otherwise specified.
+This project is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) for the complete terms.
